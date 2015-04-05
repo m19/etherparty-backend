@@ -15,10 +15,15 @@ router.get('/', restrict, function (req, res, next) {
 });
 
 router.get('/login', function (req, res, next) {
-  res.render('login');
+  res.render('login', {loginToggled: 'toggled'});
+});
+
+router.get('/register', function (req, res, next) {
+  res.redirect('login');
 });
 
 router.post('/login', user.login);
+router.post('/register', user.register);
 router.get('/logout', user.logout);
 
 module.exports = router;

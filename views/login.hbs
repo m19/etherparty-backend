@@ -16,7 +16,7 @@
 <!-- Logo -->
 
 <!-- Login -->
-<div class="lc-block toggled" id="l-login">
+<div class="lc-block {{loginToggled}}" id="l-login">
     <img src="img/dark_logo.png">
     <br>
     <hr>
@@ -31,14 +31,14 @@
             <span class="input-group-addon"><i class="md md-person"></i></span>
 
             <div class="fg-line">
-                <input type="text" class="form-control" name="username" placeholder="Username">
+                <input type="text" class="form-control" name="username" placeholder="Username" required>
             </div>
         </div>
         <div class="input-group m-b-20">
             <span class="input-group-addon"><i class="md md-accessibility"></i></span>
 
             <div class="fg-line">
-                <input type="password" class="form-control" name="password" placeholder="Password">
+                <input type="password" class="form-control" name="password" placeholder="Password" required>
             </div>
         </div>
         <div class="clearfix"></div>
@@ -57,42 +57,53 @@
     </ul>
 </div>
 <!-- Register -->
-<div class="lc-block" id="l-register">
+<div class="lc-block {{registerToggled}}" id="l-register">
     <img src="img/dark_logo.png">
     <br>
     <hr>
     <br>
 
-    <div class="input-group m-b-20">
-        <span class="input-group-addon"><i class="md md-person"></i></span>
+    {{#if registerError}}
+        <div class="alert alert-danger">{{registerError}}</div>
+    {{/if}}
 
-        <div class="fg-line">
-            <input type="text" class="form-control" placeholder="Username">
-        </div>
-    </div>
-    <div class="input-group m-b-20">
-        <span class="input-group-addon"><i class="md md-mail"></i></span>
+    {{#if registerSuccess}}
+        <div class="alert alert-success">{{registerSuccess}}</div>
+    {{/if}}
 
-        <div class="fg-line">
-            <input type="text" class="form-control" placeholder="Email Address">
-        </div>
-    </div>
-    <div class="input-group m-b-20">
-        <span class="input-group-addon"><i class="md md-accessibility"></i></span>
 
-        <div class="fg-line">
-            <input type="password" class="form-control" placeholder="Password">
+    <form method="POST" action="/register">
+        <div class="input-group m-b-20">
+            <span class="input-group-addon"><i class="md md-person"></i></span>
+
+            <div class="fg-line">
+                <input type="text" class="form-control" name="username" placeholder="Username" required>
+            </div>
         </div>
-    </div>
-    <div class="clearfix"></div>
-    <div class="checkbox">
-        <label>
-            <input type="checkbox" value="">
-            <i class="input-helper"></i>
-            Accept the license agreement
-        </label>
-    </div>
-    <a href="" class="btn btn-login btn-danger btn-float"><i class="md md-arrow-forward"></i></a>
+        <div class="input-group m-b-20">
+            <span class="input-group-addon"><i class="md md-mail"></i></span>
+
+            <div class="fg-line">
+                <input type="text" class="form-control" name="email" placeholder="Email Address" required>
+            </div>
+        </div>
+        <div class="input-group m-b-20">
+            <span class="input-group-addon"><i class="md md-accessibility"></i></span>
+
+            <div class="fg-line">
+                <input type="password" class="form-control" name="password" placeholder="Password" required>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" value="" required>
+                <i class="input-helper"></i>
+                Accept the license agreement
+            </label>
+        </div>
+        <button type="submit" class="btn btn-login btn-danger btn-float"><i class="md md-arrow-forward"></i></button>
+    </form>
     <ul class="login-navigation">
         <li data-block="#l-login" class="bgm-green">Login</li>
         <li data-block="#l-forget-password" class="bgm-orange">Forgot Password?</li>
