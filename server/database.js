@@ -21,7 +21,7 @@ function query (query, params, callback) {
 
 module.exports = {
   validateUser: function (username, password, callback) {
-    query('SELECT * FROM user WHERE username=?', [username], function (err, user, fields) {
+    query('SELECT * FROM user WHERE username=LOWER(?)', [username], function (err, user, fields) {
       if (err) return callback(err);
 
       if (user && user.length) {
