@@ -42,5 +42,26 @@ module.exports = {
         return callback('NO_USER');
       }
     });
+  },
+
+  createUser: function (username, email, password, callback) {
+    query('SELECT * FROM user WHERE username=LOWER(?) OR email=LOWER(?)',
+      [username, email], function (err, user, fields) {
+        if (err) return callback(err);
+
+        if (user && user.length) {
+          if (user[0].email == email) {
+            return callback('EMAIL_TAKEN');
+          }
+          if (user[0].username == username) {
+            return callback('USERNAME_TAKEN');
+          }
+        } else {
+          bcrypt.hash(password, 10, function (err, hash) {
+            query('INSERT INTO user (username, email, password) VALUES(?, LOWER(?), ?)',
+              [username, email, hash], callback);
+          });
+        }
+      });
   }
 };
