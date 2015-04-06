@@ -1,3 +1,5 @@
+var crypto = require('crypto');
+var nodemailer = require('nodemailer');
 var bcrypt = require('bcrypt');
 var mysql = require('mysql');
 var connection = mysql.createConnection({
@@ -7,6 +9,23 @@ var connection = mysql.createConnection({
   database: 'etherparty'
 });
 connection.connect();
+
+var transporter = nodemailer.createTransport({
+  host: 'localhost',
+  port: 25
+});
+
+function sendActivationEmail (email, token) {
+  var body = 'Hi,<br><br>';
+  body += 'Please click the following link to activate your account: http://178.62.167.14:3000/activate/' + token;
+
+  transporter.sendMail({
+    from: 'hello@etherparty.io',
+    to: email,
+    subject: 'Activate your Etherparty account',
+    text: body
+  });
+}
 
 function query (query, params, callback) {
   if (typeof params == 'function') {
@@ -58,8 +77,13 @@ module.exports = {
           }
         } else {
           bcrypt.hash(password, 10, function (err, hash) {
-            query('INSERT INTO user (username, email, password) VALUES(?, LOWER(?), ?)',
-              [username, email, hash], callback);
+            var token = crypto.randomBytes(16).toString('hex');
+
+            query('INSERT INTO user (username, email, password, activation_token, created_at) VALUES(?, LOWER(?), ?, ?, NOW())',
+              [username, email, hash, token], function (err) {
+                sendActivationEmail(email, token);
+                callback(err);
+              });
           });
         }
       });
