@@ -20,6 +20,7 @@ function sendActivationEmail (email, token) {
   body += 'Please click the following link to activate your account: http://178.62.167.14:3000/activate/' + token;
 
   transporter.sendMail({
+    from: 'noreply@etherparty.io',
     to: email,
     subject: 'Activate your Etherparty account',
     html: body
