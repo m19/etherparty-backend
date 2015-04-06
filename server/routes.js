@@ -32,6 +32,8 @@ router.get('/sandbox', restrict, function (req, res, next) {
 
 router.get('/login', function (req, res, next) {
   res.render('login', {
+    error: req.flash('error'),
+    success: req.flash('success'),
     loginToggled: 'toggled',
     layout: false
   });
@@ -44,5 +46,7 @@ router.get('/register', function (req, res, next) {
 router.post('/login', user.login);
 router.post('/register', user.register);
 router.get('/logout', user.logout);
+
+router.get('/activate/:token', user.activate);
 
 module.exports = router;

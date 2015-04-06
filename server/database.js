@@ -53,6 +53,10 @@ module.exports = {
             return callback('WRONG_PASSWORD');
           }
 
+          if (user[0].activated === 0) {
+            return callback('NOT_ACTIVATED');
+          }
+
           delete user[0].password;
 
           return callback(null, user[0]);
@@ -87,5 +91,22 @@ module.exports = {
           });
         }
       });
+  },
+
+  activateUser: function (token, callback) {
+    query('SELECT * FROM user WHERE activation_token=?', [token], function (err, user, fields) {
+      if (err) return callback(err);
+
+      if (user && user.length) {
+
+        if (user[0].activated === 1) {
+          return callback('ALREADY_ACTIVATED');
+        }
+
+        query('UPDATE user SET activated=1 WHERE activation_token=?', [token], callback);
+      } else {
+        return callback('NO_USER');
+      }
+    });
   }
 };

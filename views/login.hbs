@@ -26,6 +26,11 @@
         <div class="alert alert-danger">{{error}}</div>
     {{/if}}
 
+    {{#if success}}
+        <div class="alert alert-success">{{success}}</div>
+    {{/if}}
+
+
     <form method="POST" action="/login">
         <div class="input-group m-b-20">
             <span class="input-group-addon"><i class="md md-person"></i></span>

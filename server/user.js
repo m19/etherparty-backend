@@ -1,5 +1,5 @@
-var database = require('./database');
 var validator = require('validator');
+var database = require('./database');
 
 var user = {
   login: function (req, res, next) {
@@ -8,6 +8,10 @@ var user = {
         var error = 'Error logging in';
         if (err === 'NO_USER' || err === 'WRONG_PASSWORD') {
           error = 'Wrong username or password';
+        }
+
+        if (err === 'NOT_ACTIVATED') {
+          error = 'User not activated';
         }
 
         return res.render('login', {
@@ -80,6 +84,27 @@ var user = {
       delete req.session.user;
     }
     return res.redirect('/login');
+  },
+
+  activate: function (req, res, next) {
+    var token = req.params.token;
+
+    database.activateUser(token, function (err, result) {
+      if (err) {
+        if (err === 'NO_USER') {
+          req.flash('error', 'Invalid token.');
+        }
+
+        if (err === 'ALREADY_ACTIVATED') {
+          req.flash('error', 'User already activated.');
+        }
+
+        return res.redirect('/login');
+      } else {
+        req.flash('success', 'Successfully activated account.');
+        return res.redirect('/login');
+      }
+    });
   }
 };
 
