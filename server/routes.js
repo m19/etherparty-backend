@@ -11,11 +11,30 @@ function restrict (req, res, next) {
 }
 
 router.get('/', restrict, function (req, res, next) {
-  res.render('index');
+  res.render('index', {path: req.path});
+});
+
+router.get('/create', restrict, function (req, res, next) {
+  res.render('create', {path: req.path});
+});
+
+router.get('/my-contracts', restrict, function (req, res, next) {
+  res.render('my-contracts', {path: req.path});
+});
+
+router.get('/transactions', restrict, function (req, res, next) {
+  res.render('transactions', {path: req.path});
+});
+
+router.get('/sandbox', restrict, function (req, res, next) {
+  res.render('sandbox', {path: req.path});
 });
 
 router.get('/login', function (req, res, next) {
-  res.render('login', {loginToggled: 'toggled'});
+  res.render('login', {
+    loginToggled: 'toggled',
+    layout: false
+  });
 });
 
 router.get('/register', function (req, res, next) {

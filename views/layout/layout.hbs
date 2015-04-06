@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<!--[if IE 9 ]>
+<html class="ie9">
+   <![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Etherparty</title>
+    <!-- Vendor CSS -->
+    <link href="vendors/fullcalendar/fullcalendar.css" rel="stylesheet">
+    <link href="vendors/animate-css/animate.min.css" rel="stylesheet">
+    <link href="vendors/sweet-alert/sweet-alert.min.css" rel="stylesheet">
+    <link href="vendors/bootgrid/jquery.bootgrid.min.css" rel="stylesheet">
+    <!-- CSS -->
+    <link href="css/app.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+    <style type="text/css">
+        .dropdown-basic-demo {
+            display: inline-block;
+            margin: 0 15px 20px 0;
+        }
+
+        .dropdown-basic-demo .dropdown-menu {
+            display: block;
+            position: relative;
+            transform: scale(1);
+            opacity: 1;
+            filter: alpha(opacity=1);
+            z-index: 0;
+        }
+
+        .dropdown-btn-demo .dropdown, .dropdown-btn-demo .btn-group, .btn-demo .btn {
+            display: inline-block;
+            margin: 0 5px 7px 0;
+        }
+
+        .modal-preview-demo .modal {
+            position: relative;
+            display: block;
+            z-index: 0;
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .margin-bottom > * {
+            margin-bottom: 20px;
+        }
+
+        .popover-demo .popover {
+            position: relative;
+            display: inline-block;
+            opacity: 1;
+            margin: 0 10px 30px;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body>
+<header id="header">
+    <ul class="header-inner">
+        <li id="menu-trigger" data-trigger="#sidebar">
+            <div class="line-wrap">
+                <div class="line top"></div>
+                <div class="line center"></div>
+                <div class="line bottom"></div>
+            </div>
+        </li>
+        <li class="logo hidden-xs">
+            <img src="img/logo.png">
+        </li>
+        <li class="pull-right">
+            <ul class="top-menu">
+                <li id="toggle-width">
+                    <div class="toggle-switch">
+                        <input id="tw-switch" type="checkbox" hidden="hidden">
+                        <label for="tw-switch" class="ts-helper"></label>
+                    </div>
+                </li>
+                <li id="top-search">
+                    <a class="tm-search" href=""></a>
+                </li>
+                <li class="hidden-xs" id="chat-trigger" data-trigger="#chat">
+                    <a class="tm-chat" href=""></a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <!-- Top Search Content -->
+    <div id="top-search-wrap">
+        <input type="text">
+        <i id="top-search-close">&times;</i>
+    </div>
+</header>
+<section id="main">
+    <aside id="sidebar">
+        <div class="sidebar-inner">
+            <div class="si-inner">
+                <div class="profile-menu">
+                    <a href="">
+                        <div class="profile-pic">
+                            <h4 style="color:#fff; font-family: 'Montserrat', sans-serif; text-transform: uppercase; font-size:
+                                            12px;">Account <br></h4>
+
+                            <p style=" color: #8890AD; font-size: 10px;">3J98t1WpEZ73CNmQviecrnyiWrnqRhWNLy</p>
+                        </div>
+
+                        <div class="profile-info">
+                            Account Actions
+
+                            <i class="md md-arrow-drop-down"></i>
+                        </div>
+                    </a>
+
+                    <ul class="main-menu">
+                        <li>
+                            <a href="profile.html"><i class="md md-person"></i> View Profile</a>
+                        </li>
+                        <li>
+                            <a href="/logout"><i class="md md-history"></i> Logout</a>
+                        </li>
+                    </ul>
+                </div>
+                <ul class="main-menu">
+                    <li class="{{isActive path='/'}}"><a href="/"><i class="md md-dashboard"></i> Dashboard</a></li>
+                    <li class="{{isActive path='/create'}}"><a href="/create"><i class="md md-blur-on"></i> Create
+                        Contract</a></li>
+                    <li class="{{isActive path='/my-contracts'}}"><a href="/my-contracts"><i class="md md-receipt"></i>My
+                        Contracts</a></li>
+                    <li class="{{isActive path='/transactions'}}"><a href="/transactions"><i
+                            class="md md-settings-ethernet"></i>Transactions</a></li>
+                    <li class="{{isActive path='/sandbox'}}"><a href="/sandbox"><i
+                            class="md md-settings-applications"></i>Sandbox</a></li>
+                </ul>
+            </div>
+        </div>
+    </aside>
+    <aside id="chat">
+        <ul class="tab-nav tn-justified" role="tablist">
+            <li role="presentation" class="active"><a href="#friends" aria-controls="friends" role="tab"
+                                                      data-toggle="tab">Open Contracts</a></li>
+        </ul>
+        <div class="chat-search">
+            <div class="fg-line">
+                <input type="text" class="form-control" placeholder="Search Contracts">
+            </div>
+        </div>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade in active" id="friends">
+                <div class="listview">
+                    <a class="lv-item" href="./my-contracts.html">
+                        <div class="media">
+                            <div class="pull-left p-relative">
+                                <img class="lv-img-sm" src="img/smart_contract.png" alt="">
+                                <i class="chat-status-busy"></i>
+                            </div>
+                            <div class="media-body">
+                                <div class="lv-title">Smart Contract No.1</div>
+                                <small class="lv-small">Created</small>
+                            </div>
+                        </div>
+                    </a>
+                    <a class="lv-item" href="./my-contracts.html">
+                        <div class="media">
+                            <div class="pull-left">
+                                <img class="lv-img-sm" src="img/smart_contract.png" alt="">
+                            </div>
+                            <div class="media-body">
+                                <div class="lv-title">Smart Contract No.2</div>
+                                <small class="lv-small">Waiting</small>
+                            </div>
+                        </div>
+                    </a>
+                    <a class="lv-item" href="./my-contracts.html">
+                        <div class="media">
+                            <div class="pull-left p-relative">
+                                <img class="lv-img-sm" src="img/generic_contract.png" alt="">
+                                <i class="chat-status-online"></i>
+                            </div>
+                            <div class="media-body">
+                                <div class="lv-title">Generic Contract No.1</div>
+                                <small class="lv-small">Ready</small>
+                            </div>
+                        </div>
+                    </a>
+                    <a class="lv-item" href="./my-contracts.html">
+                        <div class="media">
+                            <div class="pull-left p-relative">
+                                <img class="lv-img-sm" src="img/smart_contract.png" alt="">
+                                <i class="chat-status-online"></i>
+                            </div>
+                            <div class="media-body">
+                                <div class="lv-title">Smart Contract No.3</div>
+                                <small class="lv-small">Ready</small>
+                            </div>
+                        </div>
+                    </a>
+                    <a class="lv-item" href="./my-contracts.html">
+                        <div class="media">
+                            <div class="pull-left">
+                                <img class="lv-img-sm" src="img/generic_contract.png" alt="">
+                            </div>
+                            <div class="media-body">
+                                <div class="lv-title">Generic Contract No.2</div>
+                                <small class="lv-small">Waiting</small>
+                            </div>
+                        </div>
+                    </a>
+                    <a class="lv-item" href="./my-contracts.html">
+                        <div class="media">
+                            <div class="pull-left">
+                                <img class="lv-img-sm" src="img/smart_contract.png" alt="">
+                            </div>
+                            <div class="media-body">
+                                <div class="lv-title">Smart Contract No.4</div>
+                                <small class="lv-small">Waiting</small>
+                            </div>
+                        </div>
+                    </a>
+                    <a class="lv-item" href="./my-contracts.html">
+                        <div class="media">
+                            <div class="pull-left p-relative">
+                                <img class="lv-img-sm" src="img/smart_contract.png" alt="">
+                                <i class="chat-status-busy"></i>
+                            </div>
+                            <div class="media-body">
+                                <div class="lv-title">Smart Contract No.5</div>
+                                <small class="lv-small">Created</small>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </aside>
+    {{{body}}}
+</section>
+<!-- Older IE warning message -->
+<!--[if lt IE 9]>
+<div class="ie-warning">
+    <h1 class="c-white">IE SUCKS!</h1>
+
+    <p>You are using an outdated version of Internet Explorer, upgrade to any of the following web browser <br/>in order
+        to access the maximum functionality of this website. </p>
+    <ul class="iew-download">
+        <li>
+            <a href="http://www.google.com/chrome/">
+                <img src="img/browsers/chrome.png" alt="">
+
+                <div>Chrome</div>
+            </a>
+        </li>
+        <li>
+            <a href="https://www.mozilla.org/en-US/firefox/new/">
+                <img src="img/browsers/firefox.png" alt="">
+
+                <div>Firefox</div>
+            </a>
+        </li>
+        <li>
+            <a href="http://www.opera.com">
+                <img src="img/browsers/opera.png" alt="">
+
+                <div>Opera</div>
+            </a>
+        </li>
+        <li>
+            <a href="https://www.apple.com/safari/">
+                <img src="img/browsers/safari.png" alt="">
+
+                <div>Safari</div>
+            </a>
+        </li>
+        <li>
+            <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
+                <img src="img/browsers/ie.png" alt="">
+
+                <div>IE (New)</div>
+            </a>
+        </li>
+    </ul>
+    <p>Upgrade your browser for a Safer and Faster web experience. <br/>Thank you for your patience...</p>
+</div>
+<![endif]-->
+<!-- Javascript Libraries -->
+<script src="js/jquery-2.1.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="vendors/flot/jquery.flot.min.js"></script>
+<script src="vendors/flot/jquery.flot.resize.min.js"></script>
+<script src="vendors/flot/plugins/curvedLines.js"></script>
+<script src="vendors/sparklines/jquery.sparkline.min.js"></script>
+<script src="vendors/easypiechart/jquery.easypiechart.min.js"></script>
+<script src="vendors/fullcalendar/lib/moment.min.js"></script>
+<script src="vendors/fullcalendar/fullcalendar.min.js"></script>
+<script src="vendors/simpleWeather/jquery.simpleWeather.min.js"></script>
+<script src="vendors/auto-size/jquery.autosize.min.js"></script>
+<script src="vendors/nicescroll/jquery.nicescroll.min.js"></script>
+<script src="vendors/bootgrid/jquery.bootgrid.min.js"></script>
+<script src="vendors/waves/waves.min.js"></script>
+<script src="vendors/bootstrap-growl/bootstrap-growl.min.js"></script>
+<script src="vendors/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
+<script src="vendors/sweet-alert/sweet-alert.min.js"></script>
+<script src="js/flot-charts/curved-line-chart.js"></script>
+<script src="js/flot-charts/line-chart.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/functions.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        //Basic Example
+        $("#data-table-basic").bootgrid({
+            css: {
+                icon: 'md icon',
+                iconColumns: 'md-view-module',
+                iconDown: 'md-expand-more',
+                iconRefresh: 'md-refresh',
+                iconUp: 'md-expand-less'
+            },
+        });
+
+        //Selection
+        $("#data-table-selection").bootgrid({
+            css: {
+                icon: 'md icon',
+                iconColumns: 'md-view-module',
+                iconDown: 'md-expand-more',
+                iconRefresh: 'md-refresh',
+                iconUp: 'md-expand-less'
+            },
+            selection: true,
+            multiSelect: true,
+            rowSelect: true,
+            keepSelection: true
+        });
+
+        //Command Buttons
+        $("#data-table-command").bootgrid({
+            css: {
+                icon: 'md icon',
+                iconColumns: 'md-view-module',
+                iconDown: 'md-expand-more',
+                iconRefresh: 'md-refresh',
+                iconUp: 'md-expand-less'
+            },
+            formatters: {
+                "commands": function (column, row) {
+                    return "<a href=\"transaction-details.html\"><button type=\"button\"  class=\"btn btn-icon command-edit\" data-row-id=\"" + row.id + "\"><span class=\"md md-view-headline\"></span></button></a> ";
+                }
+            }
+        });
+    });
+</script>
+</body>
+</html>

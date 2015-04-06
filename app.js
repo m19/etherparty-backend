@@ -8,10 +8,15 @@ var session = require('express-session');
 
 var routes = require('./server/routes');
 var app = express();
+var hbs = require('hbs');
+var isActiveHelper = require('./views/helpers/isActive');
+
+hbs.registerHelper('isActive', isActiveHelper);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+app.locals.layout = 'layout/layout.hbs';
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
