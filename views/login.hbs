@@ -63,6 +63,15 @@
     <hr>
     <br>
 
+    {{#if validationErrors}}
+        <div class="alert alert-danger">
+            Registration errors:<br>
+            {{#each validationErrors}}
+                {{this}}<br>
+            {{/each}}
+        </div>
+    {{/if}}
+
     {{#if registerError}}
         <div class="alert alert-danger">{{registerError}}</div>
     {{/if}}
@@ -84,7 +93,7 @@
             <span class="input-group-addon"><i class="md md-mail"></i></span>
 
             <div class="fg-line">
-                <input type="text" class="form-control" name="email" placeholder="Email Address" required>
+                <input type="email" class="form-control" name="email" placeholder="Email Address" required>
             </div>
         </div>
         <div class="input-group m-b-20">

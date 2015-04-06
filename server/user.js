@@ -1,4 +1,5 @@
 var database = require('./database');
+var validator = require('validator');
 
 var user = {
   login: function (req, res, next) {
@@ -26,6 +27,28 @@ var user = {
     var username = req.body.username.trim();
     var email = req.body.email.trim();
     var password = req.body.password.trim();
+
+    var validationErrors = [];
+
+    if (!validator.isAlphanumeric(username)) {
+      validationErrors.push('Username should be alphanumeric');
+    }
+
+    if (!validator.isEmail(email)) {
+      validationErrors.push('Invalid email');
+    }
+
+    if (password.length < 6) {
+      validationErrors.push('Password should be at least 6 characters');
+    }
+
+    if (validationErrors.length) {
+      return res.render('login', {
+        validationErrors: validationErrors,
+        registerToggled: 'toggled',
+        layout: false
+      });
+    }
 
     database.createUser(username, email, password, function (err) {
       if (err) {
