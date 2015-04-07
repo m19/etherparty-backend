@@ -9,10 +9,6 @@ var flash = require('connect-flash');
 
 var routes = require('./server/routes');
 var app = express();
-var hbs = require('hbs');
-var isActiveHelper = require('./views/helpers/isActive');
-
-hbs.registerHelper('isActive', isActiveHelper);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
