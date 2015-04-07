@@ -26,11 +26,21 @@
             </ul>
         </div>
         <ul class="main-menu">
-            <li><a ui-sref="dashboard"><i class="md md-dashboard"></i> Dashboard</a></li>
-            <li><a ui-sref="createContract"><i class="md md-blur-on"></i> Create Contract</a></li>
-            <li><a ui-sref="myContracts"><i class="md md-receipt"></i>My Contracts</a></li>
-            <li><a ui-sref="transactions"><i class="md md-settings-ethernet"></i>Transactions</a></li>
-            <li><a ui-sref="sandbox"><i class="md md-settings-applications"></i>Sandbox</a></li>
+            <li ui-sref-active="active">
+                <a ui-sref="dashboard"><i class="md md-dashboard"></i> Dashboard</a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="createContract"><i class="md md-blur-on"></i> Create Contract</a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="myContracts"><i class="md md-receipt"></i>My Contracts</a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="transactions"><i class="md md-settings-ethernet"></i>Transactions</a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="sandbox"><i class="md md-settings-applications"></i>Sandbox</a>
+            </li>
         </ul>
     </div>
 </div>
