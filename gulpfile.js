@@ -8,6 +8,7 @@ var paths = {
     './public/app/bower_components/angular-bootstrap/ui-bootstrap.min.js',
     './public/app/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
     './public/app/bower_components/angular-ui-router/release/angular-ui-router.min.js',
+    './public/app/bower_components/angular-drag-and-drop-lists/angular-drag-and-drop-lists.min.js',
     './public/app/app.js',
     './public/app/components/controllers/*.js',
     './public/app/components/helpers/*.js',
@@ -21,7 +22,7 @@ gulp.task('js', function () {
     .pipe(sourcemaps.init())
     .pipe(concat('bundle.js'))
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest('./public'))
+    .pipe(gulp.dest('./public/dist'))
 });
 
 gulp.task('default', ['js'], function () {

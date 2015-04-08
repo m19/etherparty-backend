@@ -1,4 +1,4 @@
-<section id="content">
+<section id="content" ng-controller="SandboxController">
     <div class="container">
         <div class="block-header">
             <h2>Sandbox</h2>
@@ -17,12 +17,11 @@
 
                 <div class="dropdown-basic-demo clearfix">
                     <p><b>DIY </b></p>
-                    <ul class="dropdown-menu" role="menu">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">If</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Except If</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Do</a></li>
-                        <li class="divider"></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">While</a></li>
+                    <ul class="dropdown-menu" role="menu" dnd-list="diyList">
+                        <li ng-repeat="item in diyList"
+                            dnd-draggable="item">
+                            <a role="menuitem" tabindex="-1">{{item}}</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="dropdown-basic-demo clearfix">
@@ -90,9 +89,20 @@
                 </h2>
                 <br>
                 <br>
-                      <textarea rows="7" cols="150"
-                                style="width: 100%;background: #607D8B;border-radius: 5px;color: #fff;padding: 10px;text-transform: uppercase;font-weight: 700;font-size: 10px;">Create Your Smart Contract
-                      </textarea>
+
+                <div class="dropdown-basic-demo"
+                     style="minimum-height: 250px; width: 100%;background: #607D8B;border-radius: 5px;color: #fff;padding: 10px;text-transform: uppercase;font-weight: 700;font-size: 10px;">
+                    Create Your Smart Contract
+                    <br/>
+                    <br/>
+                    <ul class="dropdown-menu" dnd-list="sandboxList">
+                        <li ng-repeat="item in sandboxList track by $index"
+                            dnd-moved="sandboxList.splice($index, 1)"
+                            dnd-draggable="item">
+                            <a role="menuitem" tabindex="-1">{{item}}</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
         <div class="card">

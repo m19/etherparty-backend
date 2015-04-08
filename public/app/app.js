@@ -2,7 +2,8 @@
 
 angular.module('etherparty', [
   'ui.router',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'dndLists'
 ])
   .config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise("/");
