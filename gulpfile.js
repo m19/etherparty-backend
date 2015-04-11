@@ -11,12 +11,12 @@ var paths = {
     './public/vendors/blockly/blockly_compressed.js',
     './public/vendors/blockly/blocks_compressed.js',
     './public/vendors/blockly/msg/js/en.js',
-    './public/app/blocks/**/*.js',
+    './public/app/components/blocky/**/*.js',
     './public/app/app.js',
     './public/app/components/controllers/*.js',
     './public/app/components/helpers/*.js',
     './public/app/components/filters/*.js',
-    './public/app/components/services/*.js'
+    './public/app/components/services/*.js',
   ]
 };
 
