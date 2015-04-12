@@ -21,15 +21,16 @@ Blockly.Blocks['COMMENT'] = {
     this.appendDummyInput()
       .appendField('note:')
       .appendField(new Blockly.FieldTextInput(''), 'COMMENT');
+    this.setPreviousStatement(true);
     this.setNextStatement(true);
   }
 };
 
-Blockly.Blocks['VALUE'] = {
+Blockly.Blocks['VAL'] = {
   init: function () {
     this.setColour(VALUE_COLOR);
     this.appendDummyInput()
-      .appendField(new Blockly.FieldTextInput('0', Blockly.FieldTextInput.numberValidator), 'VALUE');
+      .appendField(new Blockly.FieldTextInput('0', Blockly.FieldTextInput.numberValidator), 'VAL');
     this.setOutput(true);
   }
 };
@@ -39,8 +40,8 @@ Blockly.Blocks['TX'] = {
     this.setColour(VALUE_COLOR);
     this.appendDummyInput()
       .appendField('tx')
-      .appendField(new Blockly.FieldDropdown([['amount', 'AMOUNT'], ['origin', 'ORIGIN'], ['gas left', 'GAS LEFT'],
-        ['gas price', 'GAS PRICE']]), 'TX');
+      .appendField(new Blockly.FieldDropdown([['amount', 'callvalue'], ['origin', 'origin'], ['gas left', 'gas'],
+        ['gas price', 'gasprice']]), 'PROP');
     this.setOutput(true);
   }
 };

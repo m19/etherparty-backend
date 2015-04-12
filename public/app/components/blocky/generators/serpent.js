@@ -36,41 +36,65 @@ Blockly.Serpent.finish = function (code) {
 };
 
 Blockly.Serpent.scrubNakedValue = function (line) {
-  return line + ';\n';
+  return line + '\n';
 };
 
 Blockly.Serpent.quote_ = function (string) {
-  // TODO: This is a quick hack.  Replace with goog.string.quote
-  string = string.replace(/\\/g, '\\\\')
-    .replace(/\n/g, '\\\n')
-    .replace(/'/g, '\\\'');
-  return '\'' + string + '\'';
+  return '"' + string + '"';
 };
 
 Blockly.Serpent.scrub_ = function (block, code) {
-  var commentCode = '';
-  // Only collect comments for blocks that aren't inline.
+  if (null === code) return "";
+  var o = "";
   if (!block.outputConnection || !block.outputConnection.targetConnection) {
-    // Collect comment for this block.
-    var comment = block.getCommentText();
-    if (comment) {
-      commentCode += Blockly.Serpent.prefixLines(comment, '// ') + '\n';
-    }
-    // Collect comments for all value arguments.
-    // Don't collect comments for nested statements.
-    for (var x = 0; x < block.inputList.length; x++) {
-      if (block.inputList[x].type == Blockly.INPUT_VALUE) {
-        var childBlock = block.inputList[x].connection.targetBlock();
-        if (childBlock) {
-          var comment = Blockly.Serpent.allNestedComments(childBlock);
-          if (comment) {
-            commentCode += Blockly.Serpent.prefixLines(comment, '// ');
-          }
+    var l = block.getCommentText();
+    l && (o += this.prefixLines(l, "// ") + "\n");
+    for (var n = 0; n < block.inputList.length; n++)
+      if (block.inputList[n].type == Blockly.INPUT_VALUE) {
+        var i = block.inputList[n].connection.targetBlock();
+        if (i) {
+          var l = this.allNestedComments(i);
+          l && (o += this.prefixLines(l, "// "))
         }
       }
-    }
   }
-  var nextBlock = block.nextConnection && block.nextConnection.targetBlock();
-  var nextCode = Blockly.Serpent.blockToCode(nextBlock);
-  return commentCode + code + nextCode;
+  var s = block.nextConnection && block.nextConnection.targetBlock(),
+    a = this.blockToCode(s);
+  return o + code + a
+};
+
+Blockly.Serpent.ORDER_ATOMIC = 0;
+Blockly.Serpent.ORDER_NONE = 99;
+Blockly.Serpent.MAX_GAS = "(tx.gas - 100)";
+
+Blockly.Serpent.INIT = function (block) {
+  var init = Blockly.Serpent.statementToCode(block, 'INIT');
+  var body = Blockly.Serpent.statementToCode(block, 'BODY');
+  return 'init:\n' + init + 'code:\n' + body + '\n';
+};
+
+Blockly.Serpent.SPEND = function (block) {
+  var to = Blockly.Serpent.valueToCode(block, 'TO', Blockly.Serpent.ORDER_NONE) || 0;
+  var amount = Blockly.Serpent.valueToCode(block, "AMOUNT", Blockly.Serpent.ORDER_NONE) || "0wei";
+  return "send(" + to + ", " + amount + ", " + Blockly.Serpent.MAX_GAS + ")\n";
+};
+
+Blockly.Serpent.VAL = function (block) {
+  var code = parseFloat(block.getFieldValue("VAL") || 0);
+  return [code, Blockly.Serpent.ORDER_ATOMIC]
+};
+
+Blockly.Serpent.STOP = function () {
+  return "stop\n";
+};
+
+Blockly.Serpent.TX = function (e) {
+  var value = e.getFieldValue('PROP');
+
+  if (value == 'callvalue') {
+    return ['msg.value', Blockly.Serpent.ORDER_ATOMIC]
+  }
+
+  var code = 'tx.' + value;
+  return [code, Blockly.Serpent.ORDER_ATOMIC]
 };

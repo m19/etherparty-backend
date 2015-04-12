@@ -1,3 +1,3 @@
 Blockly.Serpent['COMMENT'] = function (value) {
-  return '# ' + value.getFieldValue('COMMENT');
+  return '# ' + value.getFieldValue('COMMENT') + '\n';
 };
