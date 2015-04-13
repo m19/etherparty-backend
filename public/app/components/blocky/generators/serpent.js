@@ -44,17 +44,17 @@ Blockly.Serpent.quote_ = function (string) {
 };
 
 Blockly.Serpent.scrub_ = function (block, code) {
-  if (null === code) return "";
-  var o = "";
+  if (null === code) return '';
+  var o = '';
   if (!block.outputConnection || !block.outputConnection.targetConnection) {
     var l = block.getCommentText();
-    l && (o += this.prefixLines(l, "// ") + "\n");
+    l && (o += this.prefixLines(l, '// ') + '\n');
     for (var n = 0; n < block.inputList.length; n++)
       if (block.inputList[n].type == Blockly.INPUT_VALUE) {
         var i = block.inputList[n].connection.targetBlock();
         if (i) {
           var l = this.allNestedComments(i);
-          l && (o += this.prefixLines(l, "// "))
+          l && (o += this.prefixLines(l, '// '))
         }
       }
   }
@@ -75,8 +75,8 @@ Blockly.Serpent.INIT = function (block) {
 
 Blockly.Serpent.SPEND = function (block) {
   var to = Blockly.Serpent.valueToCode(block, 'TO', Blockly.Serpent.ORDER_NONE) || 0;
-  var amount = Blockly.Serpent.valueToCode(block, "AMOUNT", Blockly.Serpent.ORDER_NONE) || "0wei";
-  return "send(" + to + ", " + amount + ", " + Blockly.Serpent.MAX_GAS + ")\n";
+  var amount = Blockly.Serpent.valueToCode(block, 'AMOUNT', Blockly.Serpent.ORDER_NONE) || '0wei';
+  return 'send(' + to + ', ' + amount + ', ' + Blockly.Serpent.MAX_GAS + ')\n';
 };
 
 Blockly.Serpent.VAL = function (block) {
@@ -85,7 +85,7 @@ Blockly.Serpent.VAL = function (block) {
 };
 
 Blockly.Serpent.STOP = function () {
-  return "stop\n";
+  return 'stop\n';
 };
 
 Blockly.Serpent.TX = function (e) {
