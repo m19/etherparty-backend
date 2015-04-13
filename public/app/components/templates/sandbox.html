@@ -17,7 +17,14 @@
     </category>
     <category name="Input values">
         <block type="VAL"></block>
-        <block type="CURRENCY"></block>
+        <block type="CURRENCY">
+            <field name="DENOM">ether</field>
+            <value name="AMT">
+                <block type="VAL">
+                    <field name="VAL">0</field>
+                </block>
+            </value>
+        </block>
         <block type="TX"></block>
         <block type="CONTRACT"></block>
         <block type="BLOCKINFO"></block>
@@ -34,8 +41,12 @@
         <block type="STOP"></block>
     </category>
     <category name="Variables">
-        <block type="MSTORE"></block>
-        <block type="MVAL"></block>
+        <block type="MSTORE">
+            <field name="SPOT">x</field>
+        </block>
+        <block type="MVAL">
+            <field name="SPOT">x</field>
+        </block>
         <block type="RESERVE"></block>
         <block type="LOAD"></block>
         <block type="STORE"></block>
