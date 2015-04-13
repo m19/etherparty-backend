@@ -51,8 +51,8 @@ Blockly.Blocks['CONTRACT'] = {
     this.setColour(VALUE_COLOR);
     this.appendDummyInput()
       .appendField('contract')
-      .appendField(new Blockly.FieldDropdown([['caller', 'CALLER'], ['address', 'ADDRESS'], ['balance', 'BALANCE'],
-        ['1st input', '1ST INPUT'], ['input count', 'INPUT COUNT']]), 'CONTRACT');
+      .appendField(new Blockly.FieldDropdown([['caller', 'caller'], ['address', 'address'], ['balance', 'balance'],
+        ['1st input', '1st_input'], ['input count', 'input_count']]), 'PROP');
     this.setOutput(true);
   }
 };
@@ -62,9 +62,9 @@ Blockly.Blocks['BLOCKINFO'] = {
     this.setColour(VALUE_COLOR);
     this.appendDummyInput()
       .appendField('block')
-      .appendField(new Blockly.FieldDropdown([['timestamp', 'TIMESTAMP'], ['number', 'NUMBER'],
-        ['previous hash', 'PREVIOUS HASH'], ['coinbase', 'COINBASE'], ['difficulty', 'DIFFICULTY'],
-        ['total gas', 'TOTAL GAS']]), 'BLOCKINFO');
+      .appendField(new Blockly.FieldDropdown([['timestamp', 'timestamp'], ['number', 'number'],
+        ['previous hash', 'prevhash'], ['coinbase', 'coinbase'], ['difficulty', 'difficulty'],
+        ['total gas', 'gaslimit']]), 'PROP');
     this.setOutput(true);
   }
 };
@@ -75,9 +75,9 @@ Blockly.Blocks['MATH'] = {
       ['+', '+'],
       ['*', '*'],
       ['-', '-'],
-      ['/', 'div'],
-      ['raised to', 'exp'],
-      ['modulo', 'mod']
+      ['/', '/'],
+      ['raised to', '^'],
+      ['modulo', '%']
     ];
 
     this.setColour(MATH_COLOR);
@@ -92,7 +92,7 @@ Blockly.Blocks['MATH'] = {
 Blockly.Blocks['COMPARE'] = {
   init: function () {
     var dropdown = [
-      ['=', '='],
+      ['=', '=='],
       ['>', '>'],
       ['<', '<'],
       ['!=', '!='],
@@ -111,8 +111,8 @@ Blockly.Blocks['COMPARE'] = {
 Blockly.Blocks['LOGIC'] = {
   init: function () {
     var dropdown = [
-      ['or', '||'],
-      ['and', '&&']
+      ['or', 'or'],
+      ['and', 'and']
     ];
     this.setColour(MATH_COLOR);
     this.setOutput(true);
@@ -319,7 +319,7 @@ Blockly.Blocks['MSTORE'] = {
   init: function () {
     this.setColour(VAR_COLOR);
     this.appendValueInput('VAL')
-      .appendField(new Blockly.FieldTextInput('', varValidator), 'SPOT')
+      .appendField(new Blockly.FieldTextInput('x', varValidator), 'SPOT')
       .appendField('=');
     this.setInputsInline(true);
     this.setPreviousStatement(true);

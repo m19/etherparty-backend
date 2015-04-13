@@ -63,9 +63,18 @@ Blockly.Serpent.scrub_ = function (block, code) {
   return o + code + a
 };
 
+/**
+ * Order of operations
+ */
 Blockly.Serpent.ORDER_ATOMIC = 0;
+Blockly.Serpent.ORDER_MULTIPLICATION = 5; // *
+Blockly.Serpent.ORDER_DIVISION = 5;       // /
+Blockly.Serpent.ORDER_MODULUS = 5;        // %
+Blockly.Serpent.ORDER_ADDITION = 6;       // +
+Blockly.Serpent.ORDER_SUBTRACTION = 6;    // -
 Blockly.Serpent.ORDER_NONE = 99;
-Blockly.Serpent.MAX_GAS = "(tx.gas - 100)";
+
+Blockly.Serpent.MAX_GAS = '(tx.gas - 100)';
 
 Blockly.Serpent.INIT = function (block) {
   var init = Blockly.Serpent.statementToCode(block, 'INIT');
@@ -91,10 +100,120 @@ Blockly.Serpent.STOP = function () {
 Blockly.Serpent.TX = function (e) {
   var value = e.getFieldValue('PROP');
 
+  var code;
+
   if (value == 'callvalue') {
-    return ['msg.value', Blockly.Serpent.ORDER_ATOMIC]
+    code = 'msg.value';
+  } else {
+    code = 'tx.' + value;
   }
 
-  var code = 'tx.' + value;
   return [code, Blockly.Serpent.ORDER_ATOMIC]
+};
+
+Blockly.Serpent.INPUT = function (block) {
+  var index = block.getFieldValue('INDEX') || 0;
+  var code = 'msg.data[' + index + ']';
+  return [code, Blockly.Serpent.ORDER_ATOMIC]
+};
+
+Blockly.Serpent.THINPUT = function (block) {
+  var index = Blockly.Serpent.valueToCode(block, 'ORDINAL', Blockly.Serpent.ORDER_NONE) || 1;
+  index--;
+  var code = "msg.data[" + index + "]";
+  return [code, Blockly.Serpent.ORDER_ATOMIC]
+};
+
+Blockly.Serpent.CONTRACT = function (block) {
+  var field = block.getFieldValue('PROP');
+
+  var code;
+
+  switch (field) {
+    case 'caller':
+      code = 'msg.sender';
+      break;
+    case 'address':
+      code = 'contract.address';
+      break;
+    case 'balance':
+      code = 'contract.balance';
+      break;
+    case '1st_input':
+      code = 'msg.data[0]';
+      break;
+    case 'input_count':
+      code = 'msg.datasize';
+      break;
+  }
+
+  return [code, Blockly.Serpent.ORDER_ATOMIC];
+};
+
+Blockly.Serpent.BLOCKINFO = function (block) {
+  var field = block.getFieldValue('PROP');
+  var code = 'block.' + field;
+
+  return [code, Blockly.Serpent.ORDER_ATOMIC];
+};
+
+Blockly.Serpent.MATH = function (block) {
+  var op = block.getFieldValue('OP');
+  var order = Blockly.Serpent.ORDER_NONE;
+  var a = Blockly.Serpent.valueToCode(block, 'A', order) || 0;
+  var b = Blockly.Serpent.valueToCode(block, 'B', order) || 0;
+
+  switch (op) {
+    case '+':
+      order = Blockly.Serpent.ORDER_ADDITION;
+      break;
+    case '*':
+      order = Blockly.Serpent.ORDER_MULTIPLICATION;
+      break;
+    case '-':
+      order = Blockly.Serpent.ORDER_SUBTRACTION;
+      break;
+    case '%':
+      order = Blockly.Serpent.ORDER_MODULUS;
+      break;
+  }
+
+  var code = '(' + a + ' ' + op + ' ' + b + ')';
+
+  return [code, order];
+};
+
+Blockly.Serpent.COMPARE = function (block) {
+  var compare = block.getFieldValue('OP');
+  var order = Blockly.Serpent.ORDER_NONE;
+  var a = Blockly.Serpent.valueToCode(block, 'A', order) || 0;
+  var b = Blockly.Serpent.valueToCode(block, 'B', order) || 0;
+
+  var code = '';
+  if (compare === '!=') {
+    code = 'not (' + a + ' == ' + b + ')';
+  } else {
+    code = '(' + a + ' ' + compare + ' ' + b + ')';
+  }
+
+  return [code, Blockly.Serpent.ORDER_ATOMIC];
+};
+
+Blockly.Serpent.LOGIC = function (block) {
+  var logic = block.getFieldValue('OP');
+  var order = Blockly.Serpent.ORDER_NONE;
+  var a = Blockly.Serpent.valueToCode(block, 'A', order) || 0;
+  var b = Blockly.Serpent.valueToCode(block, 'B', order) || 0;
+
+  var code = '(' + a + ' ' + logic + ' ' + b + ')';
+
+  return [code, Blockly.Serpent.ORDER_ATOMIC];
+};
+
+Blockly.Serpent.MSTORE = function (block) {
+  var spot = block.getFieldValue('SPOT') || 0;
+  var order = Blockly.Serpent.ORDER_NONE;
+  var val = Blockly.Serpent.valueToCode(block, 'VAL', order) || 0;
+
+  return spot + ' = ' + val + '\n';
 };
