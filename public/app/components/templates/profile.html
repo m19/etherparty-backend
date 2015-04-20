@@ -1,0 +1,84 @@
+<section id="content">
+    <div class="container">
+        <div class="block-header">
+            <h2>My Profile</h2>
+        </div>
+        <div class="card m-b-0" id="messages-main">
+            <div class="ms-menu">
+                <div class="ms-block">
+                    <div class="ms-user">
+                        <img src="img/profile.png" alt="">
+
+                        <div>Signed in as <br> reiner.wulfcastle@gmail.com</div>
+                    </div>
+                </div>
+
+                <div class="listview lv-user m-t-20">
+                    <a ui-sref="profile.main">
+                        <div ng-class="{ active: $state.includes('profile.main') }" class="lv-item media">
+
+                            <div class="lv-avatar bgm-purple pull-left">
+                                p
+                            </div>
+
+                            <div class="media-body">
+                                <div class="lv-title">Profile</div>
+                                <div class="lv-small">Your Public Profile</div>
+                            </div>
+                        </div>
+                    </a>
+
+
+                    <a ui-sref="profile.settings">
+                        <div ng-class="{ active: $state.includes('profile.settings') }" class="lv-item media">
+
+                            <div class="lv-avatar bgm-blue pull-left">
+                                s
+                            </div>
+
+                            <div class="media-body">
+                                <div class="lv-title">Settings</div>
+                                <div class="lv-small">Account Setting</div>
+                            </div>
+                        </div>
+                    </a>
+
+
+                    <a ui-sref="profile.data">
+                        <div ng-class="{ active: $state.includes('profile.data') }" class="lv-item media">
+                            <div class="lv-avatar bgm-red pull-left">d</div>
+                            <div class="media-body">
+                                <div class="lv-title">Data</div>
+                                <div class="lv-small">Data Settings</div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a ui-sref="profile.currency">
+                        <div ng-class="{ active: $state.includes('profile.currency') }" class="lv-item media">
+                            <div class="lv-avatar bgm-green pull-left">c</div>
+                            <div class="media-body">
+                                <div class="lv-title">Currency</div>
+                                <div class="lv-small">Choose Default Currency</div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a ui-sref="profile.interface">
+                        <div ng-class="{ active: $state.includes('profile.interface') }" class="lv-item media">
+                            <div class="lv-avatar pull-left">
+                                <div class="lv-avatar bgm-orange pull-left">u</div>
+                            </div>
+                            <div class="media-body">
+                                <div class="lv-title">User Interface</div>
+                                <div class="lv-small">UI Settings</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div ui-view></div>
+        </div>
+    </div>
+</section>
