@@ -118,14 +118,14 @@ Blockly.Serpent.TX = function (e) {
 
 Blockly.Serpent.INPUT = function (block) {
   var index = block.getFieldValue('INDEX') || 0;
-  var code = 'msg.data[' + index + ']';
+  var code = 'calldataload(' + index + ')';
   return [code, Blockly.Serpent.ORDER_ATOMIC]
 };
 
 Blockly.Serpent.THINPUT = function (block) {
   var index = Blockly.Serpent.valueToCode(block, 'ORDINAL', Blockly.Serpent.ORDER_NONE) || 1;
   index--;
-  var code = 'msg.data[' + index + ']';
+  var code = 'calldataload(' + index + ')';
   return [code, Blockly.Serpent.ORDER_ATOMIC]
 };
 
@@ -145,7 +145,7 @@ Blockly.Serpent.CONTRACT = function (block) {
       code = 'contract.balance';
       break;
     case '1st_input':
-      code = 'msg.data[0]';
+      code = 'calldataload(0)';
       break;
     case 'input_count':
       code = 'msg.datasize';
