@@ -271,7 +271,7 @@ Blockly.Serpent.LOAD = function (block) {
   var code = '';
 
   if (pool == 'sload') {
-    code = 'contract.storage[' + spot + ']';
+    code = 'self.storage[' + spot + ']';
   } else if (pool == 'mload') {
     code = 'temp[' + spot + ']';
   }
@@ -290,7 +290,7 @@ Blockly.Serpent.STORE = function (block) {
     var i = 'temp[' + spot + ']';
     code = i + ' = ' + value + '\n';
   } else if (pool == 'sstore') {
-    code = 'contract.storage[' + spot + '] = ' + value + '\n';
+    code = 'self.storage[' + spot + '] = ' + value + '\n';
   }
 
   return [code, Blockly.Serpent.ORDER_ATOMIC];
