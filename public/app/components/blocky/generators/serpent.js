@@ -90,7 +90,7 @@ Blockly.Serpent.SPEND = function (block) {
 };
 
 Blockly.Serpent.VAL = function (block) {
-  var code = parseFloat(block.getFieldValue("VAL") || 0);
+  var code = parseFloat(block.getFieldValue('VAL') || 0);
   return [code, Blockly.Serpent.ORDER_ATOMIC]
 };
 
@@ -121,7 +121,7 @@ Blockly.Serpent.INPUT = function (block) {
 Blockly.Serpent.THINPUT = function (block) {
   var index = Blockly.Serpent.valueToCode(block, 'ORDINAL', Blockly.Serpent.ORDER_NONE) || 1;
   index--;
-  var code = "msg.data[" + index + "]";
+  var code = 'msg.data[' + index + ']';
   return [code, Blockly.Serpent.ORDER_ATOMIC]
 };
 
@@ -223,25 +223,25 @@ Blockly.Serpent.CURRENCY = function (block) {
   var amount = Blockly.Serpent.valueToCode(block, 'AMT', Blockly.Serpent.ORDER_NONE) || 0;
   var denominator = block.getFieldValue('DENOM');
   var currencies = {
-    wei: "",
-    Kwei: "*10^3",
-    Mwei: "*10^6",
-    Gwei: "*10^9",
-    szabo: "*10^12",
-    finney: "*10^15",
-    ether: "*10^18",
-    Kether: "*10^21",
-    Mether: "*10^24",
-    Gether: "*10^27",
-    Tether: "*10^30",
-    Pether: "*10^33",
-    Eether: "*10^37",
-    Zether: "*10^40",
-    Yether: "*10^43",
-    Nether: "*10^45",
-    Dether: "*10^48",
-    Vether: "*10^51",
-    Uether: "*10^54"
+    wei: '',
+    Kwei: '*10^3',
+    Mwei: '*10^6',
+    Gwei: '*10^9',
+    szabo: '*10^12',
+    finney: '*10^15',
+    ether: '*10^18',
+    Kether: '*10^21',
+    Mether: '*10^24',
+    Gether: '*10^27',
+    Tether: '*10^30',
+    Pether: '*10^33',
+    Eether: '*10^37',
+    Zether: '*10^40',
+    Yether: '*10^43',
+    Nether: '*10^45',
+    Dether: '*10^48',
+    Vether: '*10^51',
+    Uether: '*10^54'
   };
 
   var code = amount + currencies[denominator];
