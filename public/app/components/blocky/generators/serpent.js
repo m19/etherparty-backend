@@ -80,7 +80,11 @@ Blockly.Serpent.MAX_GAS = '(tx.gas - 100)';
 Blockly.Serpent.INIT = function (block) {
   var init = Blockly.Serpent.statementToCode(block, 'INIT');
   var body = Blockly.Serpent.statementToCode(block, 'BODY');
-  return 'init:\n' + init + 'code:\n' + body + '\n';
+
+  if (init.length === 0) {
+    return 'def code():\n' + body + '\n';
+  }
+  return 'def init():\n' + init + 'def code():\n' + body + '\n';
 };
 
 Blockly.Serpent.SPEND = function (block) {
