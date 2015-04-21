@@ -63,6 +63,16 @@ Blockly.Serpent.scrub_ = function (block, code) {
   return o + code + a
 };
 
+Blockly.Serpent.smartVal = function (input) {
+  var t;
+  if (isNaN(input)) {
+    var o = "0X" == (input + "").substr(0, 2).toUpperCase(),
+      l = null === /[^0-9a-fx]/i.exec(input);
+    t = o && l ? input : '"' + input.replace(/"/g, "") + '"'
+  } else t = 0 > input ? "-(" + -input + ")" : input + "";
+  return t
+};
+
 /**
  * Order of operations
  */
@@ -94,7 +104,9 @@ Blockly.Serpent.SPEND = function (block) {
 };
 
 Blockly.Serpent.VAL = function (block) {
-  var code = parseFloat(block.getFieldValue('VAL') || 0);
+  var value = block.getFieldValue('VAL') || 0;
+  var code = Blockly.Serpent.smartVal(value);
+
   return [code, Blockly.Serpent.ORDER_ATOMIC]
 };
 
@@ -293,7 +305,7 @@ Blockly.Serpent.STORE = function (block) {
     code = 'self.storage[' + spot + '] = ' + value + '\n';
   }
 
-  return [code, Blockly.Serpent.ORDER_ATOMIC];
+  return code;
 };
 
 Blockly.Serpent.IF = function (block) {

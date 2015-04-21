@@ -30,7 +30,7 @@ Blockly.Blocks['VAL'] = {
   init: function () {
     this.setColour(VALUE_COLOR);
     this.appendDummyInput()
-      .appendField(new Blockly.FieldTextInput('0', Blockly.FieldTextInput.numberValidator), 'VAL');
+      .appendField(new Blockly.FieldTextInput('0', Blockly.Serpent.smartVal), 'VAL');
     this.setOutput(true);
   }
 };
