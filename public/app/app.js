@@ -24,6 +24,10 @@ angular.module('etherparty', [
         url: '/my-contracts',
         templateUrl: 'app/components/templates/myContracts.html'
       })
+      .state('pricing', {
+        url: '/pricing',
+        templateUrl: 'app/components/templates/pricing.html'
+      })
       .state('transactions', {
         url: '/transactions',
         templateUrl: 'app/components/templates/transactions.html'
