@@ -17,6 +17,7 @@ var paths = {
     './public/app/components/helpers/*.js',
     './public/app/components/filters/*.js',
     './public/app/components/services/*.js',
+    './public/app/components/directives/*.js'
   ]
 };
 
