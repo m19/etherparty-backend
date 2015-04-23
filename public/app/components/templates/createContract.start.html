@@ -1,0 +1,44 @@
+<div class="tab-pane fade active in" id="tab1">
+    <div class="row">
+        <div class="col-sm-7">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="md md-person"></i></span>
+
+                <div class="fg-line">
+                    <input type="text" class="form-control" placeholder="Contract Name">
+                </div>
+            </div>
+            <br>
+
+            <div class="input-group">
+                <span class="input-group-addon"><i class="md md-local-phone"></i></span>
+
+                <div class="fg-line">
+                    <input type="text" class="form-control" placeholder="Contract Shortname">
+                </div>
+            </div>
+            <br>
+
+            <div class="input-group">
+                <span class="input-group-addon"><i class="md md-location-on"></i></span>
+
+                <div class="fg-line">
+                    <input type="text" class="form-control" placeholder="Contract ID: 3945"
+                           disabled>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-5">
+            <textarea id="tocomp" rows="4" cols="150" style="width: 100%; height: auto;">Full Contract</textarea>
+            <textarea id="resultcomp" rows="4" cols="150" style="width: 100%; height: auto;">Full Contract</textarea>
+        </div>
+    </div>
+</div>
+<ul class="fw-footer pagination wizard">
+    <li class="previous disabled">
+        <a class="a-prevent" href=""><i class="md md-chevron-left"></i></a>
+    </li>
+    <li class="next">
+        <a ui-sref="createContract.details"><i class="md md-chevron-right"></i></a>
+    </li>
+</ul>

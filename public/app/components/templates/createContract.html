@@ -10,134 +10,13 @@
             <div class="card-body card-padding">
                 <div class="form-wizard-basic fw-container">
                     <ul class="tab-nav text-center fw-nav" tabindex="11" style="overflow: hidden; outline: none;">
-                        <li class="active"><a href="#tab1" data-toggle="tab" aria-expanded="true">Create</a></li>
-                        <li><a href="#tab2" data-toggle="tab">Details</a></li>
-                        <li><a href="#tab3" data-toggle="tab">Publish</a></li>
-                        <li><a href="#tab4" data-toggle="tab">Finish</a></li>
+                        <li ui-sref-active="active"><a ui-sref="createContract.start">Create</a></li>
+                        <li ui-sref-active="active"><a ui-sref="createContract.details">Details</a></li>
+                        <li ui-sref-active="active"><a ui-sref="createContract.publish">Publish</a></li>
+                        <li ui-sref-active="active"><a ui-sref="createContract.finish">Finish</a></li>
                     </ul>
                     <div class="tab-content">
-                        <div class="tab-pane fade active in" id="tab1">
-                            <div class="row">
-                                <div class="col-sm-7">
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="md md-person"></i></span>
-
-                                        <div class="fg-line">
-                                            <input type="text" class="form-control" placeholder="Contract Name">
-                                        </div>
-                                    </div>
-                                    <br>
-
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="md md-local-phone"></i></span>
-
-                                        <div class="fg-line">
-                                            <input type="text" class="form-control" placeholder="Contract Shortname">
-                                        </div>
-                                    </div>
-                                    <br>
-
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="md md-location-on"></i></span>
-
-                                        <div class="fg-line">
-                                            <input type="text" class="form-control" placeholder="Contract ID: 3945"
-                                                   disabled>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-5">
-                                    <textarea id="tocomp" rows="4" cols="150"
-                                              style="width: 100%; height: auto;">Full Contract</textarea>
-                                    <textarea id="resultcomp" rows="4" cols="150"
-                                              style="width: 100%; height: auto;">Full Contract</textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="tab2">
-                            <div class="form-group has-success has-feedback">
-                                <label class="control-label" for="inputSuccess2">Amount (Gas)</label>
-
-                                <div class="fg-line">
-                                    <input type="text" class="form-control" id="inputSuccess2">
-                                </div>
-                            </div>
-                            <div class="form-group has-warning has-feedback">
-                                <label class="control-label" for="inputWarning2">Price (Szabos)</label>
-
-                                <div class="fg-line">
-                                    <input type="text" class="form-control" id="inputWarning2">
-                                </div>
-                            </div>
-                            <div class="form-group has-error has-feedback">
-                                <label class="control-label" for="inputError2">Contract Price</label>
-
-                                <div class="fg-line">
-                                    <input type="text" class="form-control" id="inputError2">
-                                </div>
-                            </div>
-                            <br>
-
-                            <div class="row">
-                                <div class="col-sm-4 m-b-20">
-                                    <div class="toggle-switch" data-ts-color="red">
-                                        <label for="ts2" class="ts-label">Main Net</label>
-                                        <input id="ts2" type="checkbox" hidden="hidden">
-                                        <label for="ts2" class="ts-helper"></label>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 m-b-20">
-                                    <div class="toggle-switch" data-ts-color="blue">
-                                        <label for="ts3" class="ts-label">Testnet</label>
-                                        <input id="ts3" type="checkbox" hidden="hidden">
-                                        <label for="ts3" class="ts-helper"></label>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 m-b-20">
-                                    <div class="toggle-switch" data-ts-color="green">
-                                        <label for="ts4" class="ts-label">Backup to Storj (0.01 BTC)</label>
-                                        <input id="ts4" type="checkbox" hidden="hidden">
-                                        <label for="ts4" class="ts-helper"></label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="tab3">
-                            <div class="input-group">
-                                <div class="fg-line">
-                                    Price:
-                                </div>
-                            </div>
-                            <br>
-
-                            <div class="input-group">
-                                <div class="fg-line">
-                                    Length:
-                                </div>
-                            </div>
-                            <div class="input-group">
-                                <div class="fg-line">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" value="">
-                                            <i class="input-helper"></i>
-                                            Accept and Run
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="tab4" style="background:#fbc66a;">
-                            <center><img src="img/complete.png" alt="Smart Contract Created"></center>
-                        </div>
-                        <ul class="fw-footer pagination wizard">
-                            <li class="previous first disabled"><a class="a-prevent" href=""><i
-                                    class="md md-more-horiz"></i></a></li>
-                            <li class="previous disabled"><a class="a-prevent" href=""><i
-                                    class="md md-chevron-left"></i></a></li>
-                            <li class="next"><a class="a-prevent" href=""><i class="md md-chevron-right"></i></a></li>
-                            <li class="next last"><a class="a-prevent" href=""><i class="md md-more-horiz"></i></a></li>
-                        </ul>
+                        <div ui-view></div>
                     </div>
                 </div>
             </div>

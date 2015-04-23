@@ -17,8 +17,23 @@ angular.module('etherparty', [
         templateUrl: 'app/components/templates/dashboard.html'
       })
       .state('createContract', {
-        url: '/create',
         templateUrl: 'app/components/templates/createContract.html'
+      })
+      .state('createContract.start', {
+        url: '/create',
+        templateUrl: 'app/components/templates/createContract.start.html'
+      })
+      .state('createContract.details', {
+        url: '/create/details',
+        templateUrl: 'app/components/templates/createContract.details.html'
+      })
+      .state('createContract.publish', {
+        url: '/create/publish',
+        templateUrl: 'app/components/templates/createContract.publish.html'
+      })
+      .state('createContract.finish', {
+        url: '/create/finish',
+        templateUrl: 'app/components/templates/createContract.finish.html'
       })
       .state('myContracts', {
         url: '/my-contracts',
