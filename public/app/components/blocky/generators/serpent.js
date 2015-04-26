@@ -85,7 +85,7 @@ Blockly.Serpent.ORDER_SUBTRACTION = 6;
 Blockly.Serpent.ORDER_LOGICAL_NOT = 12;
 Blockly.Serpent.ORDER_NONE = 99;
 
-Blockly.Serpent.MAX_GAS = '(tx.gas - 100)';
+Blockly.Serpent.MAX_GAS = '(msg.gas - 100)';
 
 Blockly.Serpent.INIT = function (block) {
   var init = Blockly.Serpent.statementToCode(block, 'INIT');
