@@ -14,7 +14,5 @@ angular.module('etherparty')
       var price = $scope.contract.gasPrice * $scope.contract.gasAmount;
       price = $filter('number')(price);
       $scope.contract.price = price;
-      console.log($scope.contract);
-
     }
   });

@@ -3,7 +3,7 @@
         <label class="control-label" for="inputSuccess2">Amount (Gas)</label>
 
         <div class="fg-line">
-            <input type="text" class="form-control" id="inputSuccess2"
+            <input type="number" class="form-control" id="inputSuccess2"
                    ng-change="calculateContractPrice()"
                    ng-model="contract.gasAmount">
         </div>
@@ -12,7 +12,7 @@
         <label class="control-label" for="inputWarning2">Price (Szabos)</label>
 
         <div class="fg-line">
-            <input type="text" class="form-control" id="inputWarning2"
+            <input type="number" class="form-control" id="inputWarning2"
                    ng-change="calculateContractPrice()"
                    ng-model="contract.gasPrice">
         </div>
