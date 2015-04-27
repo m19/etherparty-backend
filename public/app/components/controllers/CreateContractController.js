@@ -14,17 +14,15 @@ angular.module('etherparty')
       compiledCode: '...result...'
     };
 
-    compileCode();
-
     $scope.calculateContractPrice = function () {
       var price = $scope.contract.gasPrice * $scope.contract.gasAmount;
       price = $filter('number')(price);
       $scope.contract.price = price;
     };
 
-    $scope.compileCode = compileCode();
+    $scope.compileCode = function () {
+      if ($scope.contract.toCompile === 'Paste contract here') return;
 
-    function compileCode () {
       $http({
         method: 'GET',
         url: '/compile/serpent',
@@ -38,5 +36,7 @@ angular.module('etherparty')
           $scope.contract.compiledCode = result.message;
         }
       });
-    }
+    };
+
+    $scope.compileCode();
   });
