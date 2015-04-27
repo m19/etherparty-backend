@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var user = require('./user');
+var compile = require('./api/compile');
 
 function restrict (req, res, next) {
   if (!req.session.user) {
@@ -32,5 +33,7 @@ router.post('/register', user.register);
 router.get('/logout', user.logout);
 
 router.get('/activate/:token', user.activate);
+
+router.get('/compile/serpent', restrict, compile.serpent);
 
 module.exports = router;
