@@ -31,8 +31,10 @@
             </div>
         </div>
         <div class="col-sm-5">
-            <textarea id="tocomp" rows="4" cols="150" style="width: 100%; height: auto;">Full Contract</textarea>
-            <textarea id="resultcomp" rows="4" cols="150" style="width: 100%; height: auto;">Full Contract</textarea>
+            <textarea ng-model="contract.toCompile" id="tocomp" rows="4" cols="150" style="width: 100%; height: auto;"
+                      ng-change="compileCode()"></textarea>
+            <textarea ng-model="contract.compiledCode" id="resultcomp" rows="4" cols="150"
+                      style="width: 100%; height: auto;"></textarea>
         </div>
     </div>
 </div>
