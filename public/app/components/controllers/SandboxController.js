@@ -10,6 +10,6 @@ angular.module('etherparty')
     function myUpdateFunction () {
       var code = Blockly.Serpent.workspaceToCode();
       document.getElementById('result').value = code;
+      localStorage.setItem('code', code);
     }
-
   });

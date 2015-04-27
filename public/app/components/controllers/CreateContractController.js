@@ -2,15 +2,19 @@
 
 angular.module('etherparty')
   .controller('CreateContractController', function ($scope, $filter, $http) {
+    var toCompile = localStorage.getItem('code') || 'Paste contract here';
+
     $scope.contract = {
       name: '',
       shortname: '',
       gasPrice: 0,
       gasAmount: 0,
       price: 0,
-      toCompile: 'Paste contract here',
+      toCompile: toCompile,
       compiledCode: '...result...'
     };
+
+    compileCode();
 
     $scope.calculateContractPrice = function () {
       var price = $scope.contract.gasPrice * $scope.contract.gasAmount;
@@ -18,8 +22,9 @@ angular.module('etherparty')
       $scope.contract.price = price;
     };
 
-    $scope.compileCode = function () {
-      console.log('test');
+    $scope.compileCode = compileCode();
+
+    function compileCode () {
       $http({
         method: 'GET',
         url: '/compile/serpent',
