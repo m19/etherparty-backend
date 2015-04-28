@@ -112,6 +112,7 @@
 </div>
 <![endif]-->
 <!-- Javascript Libraries -->
+<script src="//checkout.stripe.com/checkout.js"></script>
 <script src="dist/bundle.js"></script>
 <script src="js/jquery-2.1.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
@@ -177,6 +178,34 @@
                 }
             }
         });
+    });
+</script>
+<script type="text/javascript">
+    var handler = StripeCheckout.configure({
+        key: "pk_test_m6zx7T9viXmI29CK8KVldLrm",
+        //image: '/img/checkout/marketing/watsi.png',
+        token: function(token) {
+            $.post('/payment', {
+                stripeToken: token.id,
+                email: token.email,
+                type: token.type,
+            }, function(data) {
+                $('.block-header').append('<div class="alert alert-success">Successfully updated the plan.</div>');
+            }, 'json').fail(function(jqXHR){
+                $('.block-header').append('<div class="alert alert-danger">Error updating the plan.</div>');
+            });
+        }
+    });
+
+    $( document ).on( "click", "a#pro-plan", function(e) {
+        handler.open({
+            name: "etherparty",
+            description: "Etherparty Pro Plan",
+            allowRememberMe: "false",
+            amount: 25 * 100,
+            bitcoin: true
+        });
+        e.preventDefault();
     });
 </script>
 </body>

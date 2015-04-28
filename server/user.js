@@ -1,6 +1,8 @@
 var validator = require('validator');
 var database = require('./database');
 
+var stripe = require("stripe")('sk_test_Ur0fkKkSqpoM4XYVBtDtSRD8');
+
 var user = {
   login: function (req, res, next) {
     database.validateUser(req.body.username, req.body.password, function (err, result) {
@@ -105,7 +107,50 @@ var user = {
         return res.redirect('/login');
       }
     });
-  }
+  },
+
+  payment: function (req, res, next) {
+    var stripeToken = req.body.stripeToken;
+    if(!stripeToken) {
+      return res.status(400).json({message: 'Invalid stripe token.'});
+    }
+
+    var charge = {
+      amount: 25*100,     // amount in cents
+      currency: 'USD',    // presently can only be USD
+      description: "Etherparty subscription"
+    };
+
+    if(req.body.type == 'bitcoin_receiver') {
+      var receiver = stripe.bitcoinReceivers.create({
+        amount: charge.amount,
+        currency: charge.currency,
+        email: req.body.email
+      }, function(err, receiver) {
+        charge.source = receiver.id;
+        return postCharge();
+      });
+    } else {
+      charge.card = stripeToken;
+      return postCharge();
+    }
+
+    function postCharge() {
+      stripe.charges.create(charge, function(err, charge) {
+        if(err) {
+          return res.status(500).json({message: 'Error in proccing the payment.'});
+        }
+        database.updatePlan(req.session.user.id, function(err) {
+          if(err) {
+            return res.status(500).json({message: 'Error updating the plan.'});
+          }
+          return res.json({message: 'Successfully updated the plan.'});
+        });
+      });
+    }
+
+  },
+
 };
 
 module.exports = user;
