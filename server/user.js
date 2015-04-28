@@ -58,7 +58,7 @@ var user = {
 
     database.createUser(username, email, password, function (err) {
       if (err) {
-        var registerError = 'Error registering';
+        var registerError = 'Error registering' + err;
         if (err === 'USERNAME_TAKEN') {
           registerError = 'Username already in use';
         }
