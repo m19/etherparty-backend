@@ -35,5 +35,6 @@ router.get('/logout', user.logout);
 router.get('/activate/:token', user.activate);
 
 router.get('/compile/serpent', restrict, compile.serpent);
+router.post('/payment', restrict, user.payment);
 
 module.exports = router;

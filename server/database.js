@@ -108,5 +108,9 @@ module.exports = {
         return callback('NO_USER');
       }
     });
-  }
+  },
+
+  updatePlan: function(userId, callback) {
+    query('UPDATE user SET plan_type="pro", plan_expiry=DATE_ADD(coalesce(plan_expiry, CURRENT_DATE),INTERVAL 1 MONTH) WHERE id=?', [userId], callback);
+  },
 };
