@@ -33,4 +33,6 @@ router.get('/logout', user.logout);
 
 router.get('/activate/:token', user.activate);
 
+router.post('/payment', restrict, user.payment);
+
 module.exports = router;
