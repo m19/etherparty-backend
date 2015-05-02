@@ -58,7 +58,7 @@ var user = {
 
     database.createUser(username, email, password, function (err) {
       if (err) {
-        var registerError = 'Error registering';
+        var registerError = 'Error registering' + err;
         if (err === 'USERNAME_TAKEN') {
           registerError = 'Username already in use';
         }
@@ -111,22 +111,22 @@ var user = {
 
   payment: function (req, res, next) {
     var stripeToken = req.body.stripeToken;
-    if(!stripeToken) {
+    if (!stripeToken) {
       return res.status(400).json({message: 'Invalid stripe token.'});
     }
 
     var charge = {
-      amount: 25*100,     // amount in cents
+      amount: 25 * 100,     // amount in cents
       currency: 'USD',    // presently can only be USD
       description: "Etherparty subscription"
     };
 
-    if(req.body.type == 'bitcoin_receiver') {
+    if (req.body.type == 'bitcoin_receiver') {
       var receiver = stripe.bitcoinReceivers.create({
         amount: charge.amount,
         currency: charge.currency,
         email: req.body.email
-      }, function(err, receiver) {
+      }, function (err, receiver) {
         charge.source = receiver.id;
         return postCharge();
       });
@@ -135,13 +135,13 @@ var user = {
       return postCharge();
     }
 
-    function postCharge() {
-      stripe.charges.create(charge, function(err, charge) {
-        if(err) {
+    function postCharge () {
+      stripe.charges.create(charge, function (err, charge) {
+        if (err) {
           return res.status(500).json({message: 'Error in proccing the payment.'});
         }
-        database.updatePlan(req.session.user.id, function(err) {
-          if(err) {
+        database.updatePlan(req.session.user.id, function (err) {
+          if (err) {
             return res.status(500).json({message: 'Error updating the plan.'});
           }
           return res.json({message: 'Successfully updated the plan.'});

@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var user = require('./user');
 var compile = require('./api/compile');
+var publish = require('./api/publish');
 
 function restrict (req, res, next) {
   if (!req.session.user) {
@@ -35,6 +36,8 @@ router.get('/logout', user.logout);
 router.get('/activate/:token', user.activate);
 
 router.get('/compile/serpent', restrict, compile.serpent);
+router.get('/contract/publish', restrict, publish.contract);
+
 router.post('/payment', restrict, user.payment);
 
 module.exports = router;

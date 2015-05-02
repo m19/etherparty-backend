@@ -5,8 +5,8 @@ CREATE TABLE `user` (
   `password` varchar(64) NOT NULL DEFAULT '',
   `plan_type` varchar(11) NOT NULL DEFAULT 'free',
   `plan_expiry` date DEFAULT NULL,
-  `activation_token` varchar(32) DEFAULT NULL,
-  `activated` tinyint(1) DEFAULT '0',
-  `created_at` datetime DEFAULT NULL,
+  `activation_token` varchar(64) NOT NULL DEFAULT '',
+  `created_at` date NOT NULL,
+  `activated` int(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
