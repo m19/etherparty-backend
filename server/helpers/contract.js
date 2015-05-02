@@ -16,7 +16,6 @@ var contract = {
     var params = [{
       from: data.from,
       gas: '0x' + data.gas.toString(16),
-      gasPrice: '0x' + data.gasPrice.toString(16),
       data: '0x' + data.data
     }];
 
