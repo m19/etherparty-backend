@@ -19,6 +19,8 @@ var contract = {
       data: '0x' + data.data
     }];
 
+    console.log(params);
+
     axios.post('http://localhost:8545', {
       method: 'eth_sendTransaction',
       params: params
