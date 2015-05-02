@@ -5,6 +5,8 @@ var publish = {
     var compiledContract = req.query.contract;
 
     contract.getCoinbase(function (err, result) {
+      console.log(err);
+      console.log(result);
       if (!err && result) {
         var coinbase = result.result;
 
@@ -14,7 +16,10 @@ var publish = {
           data: compiledContract
         };
 
-        contract.sendTransaction(data, function (result) {
+        console.log(data);
+
+        contract.sendTransaction(data, function (err, result) {
+          console.log(err);
           console.log(result);
           res.json(result);
         });
