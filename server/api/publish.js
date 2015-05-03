@@ -12,7 +12,7 @@ var publish = {
 
         var data = {
           from: coinbase,
-          gas: 30000,
+          gas: 3000000,
           data: compiledContract
         };
 
