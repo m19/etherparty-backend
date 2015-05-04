@@ -1,7 +1,7 @@
 <div class="tab-pane fade active in" id="tab3">
     <div class="input-group">
         <div class="fg-line">
-            Price:
+            Price: {{contract.price}}
         </div>
     </div>
     <br>
@@ -15,7 +15,7 @@
         <div class="fg-line">
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" value="">
+                    <input type="checkbox" ng-model="contract.accept" ng-checked="contract.accept">
                     <i class="input-helper"></i>
                     Accept and Run
                 </label>
@@ -27,7 +27,11 @@
     <li class="previous">
         <a ui-sref="createContract.details"><i class="md md-chevron-left"></i></a>
     </li>
-    <li class="next">
-        <a ui-sref="createContract.finish"><i class="md md-chevron-right"></i></a>
+    <li class="next" ng-if="contract.accept">
+        <a ng-click="publishContract()" tooltip="Clicking this button will publish the contract"
+           style="cursor: pointer;"><i class="md md-chevron-right"></i></a>
+    </li>
+    <li class="next disabled" ng-if="!contract.accept">
+        <a tooltip="Please accept before continuing"><i class="md md-chevron-right"></i></a>
     </li>
 </ul>

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('etherparty')
-  .controller('CreateContractController', function ($scope, $filter, $http) {
+  .controller('CreateContractController', function ($scope, $filter, $http, $state) {
     var toCompile = localStorage.getItem('code') || 'Paste contract here';
 
     $scope.contract = {
@@ -11,7 +11,8 @@ angular.module('etherparty')
       gasAmount: 0,
       price: 0,
       toCompile: toCompile,
-      compiledCode: '...result...'
+      compiledCode: '...result...',
+      accept: false,
     };
 
     $scope.calculateContractPrice = function () {
@@ -35,6 +36,19 @@ angular.module('etherparty')
         } else if (result && result.status === 'error') {
           $scope.contract.compiledCode = result.message;
         }
+      });
+    };
+
+    $scope.publishContract = function () {
+      $http({
+        method: 'GET',
+        url: '/contract/publish',
+        params: {
+          contract: $scope.contract.compiledCode
+        }
+      }).success(function (result) {
+        console.log(result);
+        $state.go('createContract.finish');
       });
     };
 
