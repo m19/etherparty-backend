@@ -13,6 +13,7 @@ angular.module('etherparty')
       toCompile: toCompile,
       compiledCode: '...result...',
       accept: false,
+      result: null
     };
 
     $scope.calculateContractPrice = function () {
@@ -48,6 +49,10 @@ angular.module('etherparty')
         }
       }).success(function (result) {
         console.log(result);
+        if (result.result) {
+          $scope.contract.result = result.result;
+        }
+
         $state.go('createContract.finish');
       });
     };
