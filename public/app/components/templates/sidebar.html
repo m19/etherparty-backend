@@ -1,21 +1,23 @@
 <div class="sidebar-inner">
     <div class="si-inner">
         <div class="profile-menu">
-            <a href="">
+            <div class="profile">
                 <div class="profile-pic">
                     <h4 style="color:#fff; font-family: 'Montserrat', sans-serif; text-transform: uppercase; font-size:
                                             12px;">Account <br></h4>
-
-                    <p style=" color: #8890AD; font-size: 10px;">3J98t1WpEZ73CNmQviecrnyiWrnqRhWNLy</p>
+                    <div ng-if="account">
+                        <p style=" color: #8890AD; font-size: 10px;">{{account}}</p>
+                    </div>
+                    <div ng-if="!account">
+                        <button class="btn btn-primary" ng-click="click()">Create account</button>
+                    </div>
                 </div>
-
                 <div class="profile-info">
                     Account Actions
 
                     <i class="md md-arrow-drop-down"></i>
                 </div>
-            </a>
-
+            </div>
             <ul class="main-menu">
                 <li ui-sref-active="active">
                     <a ui-sref="profile.main"><i class="md md-person"></i> View Profile</a>

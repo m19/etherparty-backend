@@ -1,4 +1,23 @@
 .blocklySvg {
-    height: 400px;
-    width: 100%;
+  height: 400px;
+  width: 100%;
+}
+#sidebar .profile-menu >.profile .profile-pic {
+  padding: 12px;
+}
+#sidebar .profile-menu>.profile .profile-info {
+  background: rgba(0, 0, 0, .37);
+  padding: 7px 14px;
+  color: #fff;
+  margin-top: 10px;
+  position: relative;
+  cursor: pointer;
+}
+#sidebar .profile-menu>.profile {
+  display: block;
+  height: 129px;
+  margin-bottom: 5px;
+  width: 100%;
+  background: #161c30;
+  background-size: 100%;
 }
